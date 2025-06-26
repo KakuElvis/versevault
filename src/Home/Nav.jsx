@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Nav = () => {
   return (
@@ -31,16 +32,16 @@ const Nav = () => {
                   {/* <!-- Action Buttons --> */}
             <div>
                 <div class="hidden lg:flex items-center justify-center space-x-6">
-                  <a href="/pages/signin.html">
-                    <button class="text-white bg-button-main px-9 py-3 rounded-md capitalize font-bold hover:opacity-80 ease-in duration-200">
+                  <Link to="/signin">
+                    <button class="text-white bg-button-main px-9 py-3 rounded-md capitalize font-bold cursor-pointer hover:opacity-80 ease-in duration-200">
                       Login
                     </button>
-                </a>
-                <a href="/pages/signup.html">
-                    <button class="text-white bg-button-second px-9 py-3 rounded-md capitalize font-bold hover:opacity-80 ease-in duration-200">
+                </Link>
+                <Link to="/signup">
+                    <button class="text-white bg-button-second px-9 py-3 rounded-md capitalize font-bold cursor-pointer hover:opacity-80 ease-in duration-200">
                       Get Started
                     </button>
-                </a>
+                </Link>
                 </div>
             </div>
               
