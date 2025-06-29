@@ -9,6 +9,7 @@ import Home from './Pages/Home'
 import Signup from './Pages/Signup'; 
 import Signin from './Pages/Signin';
 import Post_blurb from './Pages/Post_blurb';
+import Verse from './Pages/Verse';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/post_blurb" element={<Post_blurb />} />
+          <Route path="/verse" element={<Verse />} />
         </Routes>
       </Router>
       

@@ -30,7 +30,7 @@ const Nav = () => {
                     <Link to="/post_blurb" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Create</Link>
                   </li>
                   <li>
-                    <Link to="/blurbs" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Blurbs</Link>
+                    <Link to="/verse" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Blurbs</Link>
                   </li>
                 </ul>
             </div>

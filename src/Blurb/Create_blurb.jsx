@@ -14,11 +14,11 @@ const Create_blurb = () => {
                 <form action="#" method="POST">
                     <div class="mb-4">
                         <label for="book-title" class="block text-gray-600">Book Title</label>
-                        <input type="text" id="book-title" name="book-title" placeholder="The Alchemist" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                        <input type="text" id="book-title" name="book-title" placeholder="The Alchemist" class="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div class="mb-4">
                         <label for="blurb" class="block text-gray-600">Blurb</label>
-                        <textarea id="blurb" name="blurb" rows="4" placeholder="Unleash your thoughts in brief brilliance" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        <textarea id="blurb" name="blurb" rows="4" placeholder="Unleash your thoughts in brief brilliance" class="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     </div>
                     <div class="mb-4 items-center">
                         <p class="pb-2 text-gray-700  text-xs">Choose Blurb Category</p>
