@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 const Nav = () => {
   return (
+
     <>
     
     <header>
@@ -25,7 +27,10 @@ const Nav = () => {
                     <a href="#contact" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Contact</a>
                   </li>
                   <li>
-                    <a href="#contact" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Blog</a>
+                    <Link to="/post_blurb" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Create</Link>
+                  </li>
+                  <li>
+                    <Link to="/blurbs" class="hover:bg-hover-text ease-in duration-200 px-4 py-2 rounded-md">Blurbs</Link>
                   </li>
                 </ul>
             </div>
@@ -57,6 +62,8 @@ const Nav = () => {
                         <li><a id="hLink" href="#home" class="hover:bg-hover-text ease-in duration-200">Home</a></li>
                         <li><a id="hLink" href="#about" class="hover:bg-hover-text ease-in duration-200">About</a></li>
                         <li><a id="hLink" href="#contact" class="hover:bg-hover-text ease-in duration-200">Contact</a></li>
+                        <li><a id="hLink" href="#contact" class="hover:bg-hover-text ease-in duration-200">Create Blurb</a></li>
+                        <li><a id="hLink" href="#contact" class="hover:bg-hover-text ease-in duration-200">Blurbs</a></li>
                     </div>
 
                     <div class="flex items-center space-x-4">
@@ -70,8 +77,11 @@ const Nav = () => {
     
     
     
+    
     </>
   )
 }
 
+        
+      
 export default Nav

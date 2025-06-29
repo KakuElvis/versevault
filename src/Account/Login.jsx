@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 const Login = () => {
   return (
     <>
-        <div className='flex items-center justify-center h-screen bg-gray-100'>
-            <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <div className='bg-gray-100 flex items-center justify-center h-screen'style={{ backgroundImage: `url('./src/assets/verse.svg')`}}>
+            <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h2 class="text-2xl font-bold mb-6 text-center text-gray-600">Start Blurbing</h2>
                 <h4 class="text-left text-gray-600 mb-6">Login to blurb</h4>
 
                 <form>
-                    <input type="text" placeholder="Username" required class="w-full p-3 mb-4 border border-gray-300 rounded"/>
+                    <input type="text" placeholder="Username" required class="w-full p-3 mb-4 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     <div class="relative mb-4">
-                        <input type="password" id="password" placeholder="Password" required class="w-full p-3 border border-gray-300 rounded"/>
+                        <input type="password" id="password" placeholder="Password" required class="w-full px-4 py-2 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                         <span class="absolute right-3 top-3 cursor-pointer" onclick="togglePassword()">👁️</span>
                     </div>
                     
