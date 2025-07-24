@@ -5,11 +5,12 @@
 // import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import React from 'react'
-import Home from './Pages/Home'
-import Signup from './Pages/Signup'; 
-import Signin from './Pages/Signin';
-import Post_blurb from './Pages/Post_blurb';
-import Verse from './Pages/Verse';
+import Home from './components/Pages/Home'
+import Signup from './components/Pages/Signup'; 
+import Signin from './components/Pages/Signin';
+import Post_blurb from './components/Pages/Post_blurb';
+import Verse from './components/Pages/Verse';
+import Dashboard from './components/Pages/Dashboard';
 
 function App() {
 
@@ -36,6 +37,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/post_blurb" element={<Post_blurb />} />
           <Route path="/verse" element={<Verse />} />
+
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
       
