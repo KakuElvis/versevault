@@ -17,8 +17,8 @@ const Nav = () => {
         </ul>
 
         <div className="hidden lg:flex gap-4">
-          <Link to="/signin" className="bg-button-main text-white px-4 py-2 rounded hover:opacity-80">Login</Link>
-          <Link to="/signup" className="bg-button-second text-white px-4 py-2 rounded hover:opacity-80">Get Started</Link>
+          <Link to="/login" className="bg-button-main text-white px-4 py-2 rounded hover:opacity-80">Login</Link>
+          <Link to="/register" className="bg-button-second text-white px-4 py-2 rounded hover:opacity-80">Get Started</Link>
         </div>
       </nav>
     </header>
