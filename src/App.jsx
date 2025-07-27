@@ -9,6 +9,7 @@ import CreateBlurb from './pages/CreateBlurb';
 import Profile from './pages/Profile';
 import Verse from './pages/Verse';
 import ProtectedRoute from './routes/ProtectedRoute';
+import AllBlurbs from './pages/AllBlurbs';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/blurbs" element={<AllBlurbs />} /> 
       <Route
         path="/dashboard"
         element={
@@ -48,6 +50,7 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+      {/* <Route path="/blurbs" element={<AllBlurbs />} /> */}
     </Routes>
   );
 };

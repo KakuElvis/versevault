@@ -56,7 +56,7 @@ const Nav = () => {
           </li>
           <li>
             <Link
-              to="/verse"
+              to="/blurbs"
               className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
             >
               Blurbs

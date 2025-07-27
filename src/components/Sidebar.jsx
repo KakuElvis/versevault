@@ -46,7 +46,7 @@ const Sidebar = () => {
                 <li class="mb-4 flex items-center space-x-2">
                     <span class="bg-white text-black p-2 rounded-md">
                     <i class="fa-solid fa-message"></i></span>
-                    <a href="#" class="hover:text-gray-300">Messages</a>
+                    <a href="/verse" class="hover:text-gray-300">Blurbs</a>
                 </li>
                 <li class="mb-4 flex items-center space-x-2">
                     <span class="bg-white text-black p-2 rounded-md">
