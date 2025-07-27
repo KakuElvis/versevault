@@ -1,26 +1,129 @@
-// src/components/Nav.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/logop.png";
 
 const Nav = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => setMenuOpen(!menuOpen);
+
+  const closeMobileMenu = () => setMenuOpen(false);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-      <nav className="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
-        <Link to="/" className="text-logo text-2xl font-bold">VerseVault</Link>
-        
-        <ul className="hidden lg:flex gap-6 font-semibold">
-          <li><a href="#home" className="hover:text-logo">Home</a></li>
-          <li><a href="#about" className="hover:text-logo">About</a></li>
-          <li><a href="#contact" className="hover:text-logo">Contact</a></li>
-          <li><Link to="/post_blurb" className="hover:text-logo">Create</Link></li>
-          <li><Link to="/verse" className="hover:text-logo">Blurbs</Link></li>
+    <header>
+      <nav className="px-20 flex justify-between items-center bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        {/* Logo */}
+        <div className="py-5 font-bold text-3xl flex items-center space-x-2">
+          <a href="#home" className="flex items-center space-x-2 text-logo">
+            <img src={logo} alt="VerseVault Logo" className="object-contain" width="100" height="50" />
+            {/* <span>VerseVault</span> */}
+          </a>
+        </div>
+
+        {/* Desktop Nav */}
+        <ul className="hidden lg:flex items-center font-bold justify-center space-x-6">
+          <li>
+            <a
+              href="#home"
+              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#about"
+              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="#contact"
+              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
+            >
+              Contact
+            </a>
+          </li>
+          <li>
+            <Link
+              to="/post_blurb"
+              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
+            >
+              Create
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/verse"
+              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
+            >
+              Blurbs
+            </Link>
+          </li>
         </ul>
 
-        <div className="hidden lg:flex gap-4">
-          <Link to="/login" className="bg-button-main text-white px-4 py-2 rounded hover:opacity-80">Login</Link>
-          <Link to="/register" className="bg-button-second text-white px-4 py-2 rounded hover:opacity-80">Get Started</Link>
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center space-x-4">
+          <Link to="/login">
+            <button className="text-white bg-button-main px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
+              Login
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="text-white bg-button-second px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
+              Get Started
+            </button>
+          </Link>
+        </div>
+
+        {/* Mobile Hamburger */}
+        <div
+          id="hamburger"
+          className="lg:hidden cursor-pointer z-50"
+          onClick={toggleMobileMenu}
+        >
+          <i className="fa-solid fa-bars text-xl"></i>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div
+          id="menu"
+          className="lg:hidden bg-logo h-screen w-full fixed inset-0 z-40 flex flex-col items-center justify-center space-y-6 text-white font-semibold text-lg"
+        >
+          <a href="#home" onClick={closeMobileMenu}>
+            Home
+          </a>
+          <a href="#about" onClick={closeMobileMenu}>
+            About
+          </a>
+          <a href="#contact" onClick={closeMobileMenu}>
+            Contact
+          </a>
+          <Link to="/post_blurb" onClick={closeMobileMenu}>
+            Create Blurb
+          </Link>
+          <Link to="/verse" onClick={closeMobileMenu}>
+            Blurbs
+          </Link>
+
+          <div className="mt-6 space-y-4">
+            <Link to="/login" onClick={closeMobileMenu}>
+              <button className="bg-button-main px-6 py-2 rounded-md font-bold hover:opacity-80 transition">
+                Login
+              </button>
+            </Link>
+            <Link to="/register" onClick={closeMobileMenu}>
+              <button className="bg-button-second px-6 py-2 rounded-md font-bold hover:opacity-80 transition">
+                Get Started
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

@@ -30,7 +30,10 @@ const Profile = () => {
             />
             <div>
               <p className="text-lg font-semibold">{user?.email}</p>
-              <p className="text-gray-500 text-sm">Member since: Coming soon</p>
+              <p className="text-gray-500 text-sm">Member since: {user?.metadata?.creationTime 
+                ? new Date(user.metadata.creationTime).toLocaleDateString() 
+                : "Loading..."}
+              </p>
             </div>
           </div>
 
