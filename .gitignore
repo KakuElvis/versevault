@@ -23,4 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+# Ignore environment variable file
 .env
+
+# Ignore Firebase config file (adjust path if different)
+src/firebase/firebase.js
+/firebase/firebase.json
+/firebase/
+firebase/
