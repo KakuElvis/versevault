@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Verse from './pages/Verse';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AllBlurbs from './pages/AllBlurbs';
+import ProfileSettings from "./pages/ProfileSettings";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/blurbs" element={<AllBlurbs />} /> 
+      <Route path="/settings" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
       <Route
         path="/dashboard"
         element={
