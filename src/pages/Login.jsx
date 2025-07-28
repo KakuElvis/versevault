@@ -22,14 +22,14 @@ const Login = () => {
 
   return (
     <div
-      className="bg-gray-100 flex items-center justify-center h-screen"
+      className="bg-gray-100 flex items-center justify-center h-screen bg-cover bg-center"
       style={{ backgroundImage: `url('./src/assets/verse.svg')` }}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-600">
           Start Blurbing
         </h2>
-        <h4 className="text-left text-gray-600 mb-6">Login to blurb</h4>
+        {/* <h4 className="text-left text-gray-600 mb-6">Login to blurb</h4> */}
 
         <form onSubmit={handleLogin}>
           <input

@@ -3,6 +3,7 @@ import React from "react";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import HowTo from "../components/How_to";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <main>
         <Hero />
         <HowTo />
+        <Footer/>
       </main>
     </div>
   );

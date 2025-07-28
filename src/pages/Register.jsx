@@ -22,7 +22,7 @@ const Register = () => {
 
   return (
     <div
-      className="bg-gray-100 flex items-center justify-center h-screen"
+      className="bg-gray-100 flex items-center justify-center h-screen bg-cover bg-center"
       style={{ backgroundImage: `url('./src/assets/verse.svg')` }}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">

@@ -48,14 +48,6 @@ const Nav = () => {
           </li>
           <li>
             <Link
-              to="/post_blurb"
-              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
-            >
-              Create
-            </Link>
-          </li>
-          <li>
-            <Link
               to="/blurbs"
               className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
             >
