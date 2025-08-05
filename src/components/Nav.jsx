@@ -15,7 +15,7 @@ const Nav = () => {
         {/* Logo */}
         <div className="py-5 font-bold text-3xl flex items-center space-x-2">
           <a href="#home" className="flex items-center space-x-2 text-logo">
-            <img src={logo} alt="VerseVault Logo" className="object-contain" width="100" height="50" />
+            <img src={logo} alt="VerseVault Logo" className="object-contain" width="50" height="50" />
             {/* <span>VerseVault</span> */}
           </a>
         </div>
@@ -24,20 +24,20 @@ const Nav = () => {
         <ul className="hidden lg:flex items-center font-bold justify-center space-x-6">
           <li>
             <a
-              href="#home"
+              href="/"
               className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
             >
               Home
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#about"
               className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
             >
               About
             </a>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/blurbs"
@@ -51,12 +51,12 @@ const Nav = () => {
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center space-x-4">
           <Link to="/login">
-            <button className="text-white bg-button-main px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
+            <button className="text-white bg-button-main px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition cursor-pointer">
               Login
             </button>
           </Link>
           <Link to="/register">
-            <button className="text-white bg-button-main/50 px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
+            <button className="text-white bg-button-main/50 px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition cursor-pointer">
               Get Started
             </button>
           </Link>
@@ -81,9 +81,9 @@ const Nav = () => {
           <a href="#home" onClick={closeMobileMenu}>
             Home
           </a>
-          <a href="#about" onClick={closeMobileMenu}>
+          {/* <a href="#about" onClick={closeMobileMenu}>
             About
-          </a>
+          </a> */}
           {/* <a href="#contact" onClick={closeMobileMenu}>
             Contact
           </a>

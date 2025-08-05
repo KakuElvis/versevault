@@ -38,12 +38,14 @@ const Verse = () => {
         <Topbar />
 
         <main className="p-4 sm:p-6 w-full max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">📚 All Blurbs</h2>
+          <h2 className="text-2xl font-bold mb-6 text-logo">📚 All Blurbs</h2>
 
           {loading ? (
-            <p>Loading blurbs...</p>
+            <div className="flex justify-center items-center h-40">
+              <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
           ) : blurbs.length === 0 ? (
-            <p>No blurbs posted yet.</p>
+            <p className="text-gray-600">No blurbs posted yet.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {blurbs.map((blurb) => (
