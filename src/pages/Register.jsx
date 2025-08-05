@@ -62,7 +62,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+            className="w-full bg-logo text-white py-2 rounded-lg cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
           >
             Sign Up
           </button>
@@ -82,9 +82,9 @@ const Register = () => {
           </a>
           <p className="text-center py-3 text-gray-700">
             Already have an account?{' '}
-            <a href="/login" className="text-blue-700">Sign-in</a>
+            <a href="/login" className="text-logo">Sign-in</a>
           </p>
-          <p className="text-center text-blue-400 text-sm">
+          <p className="text-center text-logo text-sm">
             Terms and Conditions | Privacy Policy
           </p>
         </div>

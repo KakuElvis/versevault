@@ -31,3 +31,20 @@ src/firebase/firebase.js
 /firebase/firebase.json
 /firebase/
 firebase/
+
+# Firebase or environment config
+.env
+.env.local
+firebaseConfig.js
+firebase/firebase.js
+
+# OS files
+.DS_Store
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+src/firebase/firebase.js

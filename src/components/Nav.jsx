@@ -39,14 +39,6 @@ const Nav = () => {
             </a>
           </li>
           <li>
-            <a
-              href="#contact"
-              className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
-            >
-              Contact
-            </a>
-          </li>
-          <li>
             <Link
               to="/blurbs"
               className="hover:bg-logo/10 ease-in duration-200 px-4 py-2 rounded-md"
@@ -64,7 +56,7 @@ const Nav = () => {
             </button>
           </Link>
           <Link to="/register">
-            <button className="text-white bg-button-second px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
+            <button className="text-white bg-button-main/50 px-6 py-2 rounded-md capitalize font-bold hover:opacity-80 transition">
               Get Started
             </button>
           </Link>
@@ -84,7 +76,7 @@ const Nav = () => {
       {menuOpen && (
         <div
           id="menu"
-          className="lg:hidden bg-logo h-screen w-full fixed inset-0 z-40 flex flex-col items-center justify-center space-y-6 text-white font-semibold text-lg"
+          className="lg:hidden bg-logo/90 h-screen w-full fixed inset-0 z-40 flex flex-col items-center justify-center space-y-6 text-white font-semibold text-lg"
         >
           <a href="#home" onClick={closeMobileMenu}>
             Home
@@ -92,13 +84,13 @@ const Nav = () => {
           <a href="#about" onClick={closeMobileMenu}>
             About
           </a>
-          <a href="#contact" onClick={closeMobileMenu}>
+          {/* <a href="#contact" onClick={closeMobileMenu}>
             Contact
           </a>
           <Link to="/post_blurb" onClick={closeMobileMenu}>
             Create Blurb
-          </Link>
-          <Link to="/verse" onClick={closeMobileMenu}>
+          </Link> */}
+          <Link to="/blurbs" onClick={closeMobileMenu}>
             Blurbs
           </Link>
 
@@ -109,7 +101,7 @@ const Nav = () => {
               </button>
             </Link>
             <Link to="/register" onClick={closeMobileMenu}>
-              <button className="bg-button-second px-6 py-2 rounded-md font-bold hover:opacity-80 transition">
+              <button className="bg-button-main/50 px-6 py-2 rounded-md font-bold hover:opacity-80 transition">
                 Get Started
               </button>
             </Link>

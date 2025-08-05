@@ -38,7 +38,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-3 mb-4 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 mb-4 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-logo"
           />
           <div className="mb-4 relative">
             <input
@@ -46,7 +46,7 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-logo"
               required
             />
             <span
@@ -64,14 +64,14 @@ const Login = () => {
             </label>
           </div>
           <div className="text-left mb-4">
-            <a href="#" className="text-blue-500 text-sm hover:underline">
+            <a href="#" className="text-logo text-sm hover:underline">
               Forgot Password?
             </a>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+            className="w-full bg-logo text-white p-3 rounded hover:bg-blue-600"
           >
             Sign In
           </button>
@@ -80,7 +80,7 @@ const Login = () => {
         <div>
           <h3 className="text-center py-3">Or instead</h3>
           <a href="#">
-            <button className="flex items-center justify-center px-3 w-full bg-white text-gray-600 border border-gray-400 py-2 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button className="flex items-center justify-center px-3 w-full bg-white text-gray-600 border border-gray-400 py-2 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-logo">
               <img
                 src="../src/assets/google.svg"
                 alt="Google Logo"
@@ -92,7 +92,7 @@ const Login = () => {
           <div>
             <Link to="/register">
               <h3 className="text-center py-3 text-gray-700">
-                Don't have an account? <span className="text-blue-700">Sign-up</span>
+                Don't have an account? <span className="text-logo">Sign-up</span>
               </h3>
             </Link>
           </div>

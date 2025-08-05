@@ -5,19 +5,39 @@ import readImage from '../assets/read.svg';
 
 const Hero = () => {
   return (
-    <section id="hero" className="bg-[#176183]/90 text-white pt-40 pb-20 px-6 md:px-20">
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <div className="md:w-1/2 mb-10 md:mb-0">
-          <h1 className="text-4xl md:text-5xl font-semibold leading-relaxed mb-6">
-            “Unleash your thoughts in brief brilliance — where words meet impact, and ideas find expression.”
+    <section id="hero"
+      className="bg-logo/90 text-white pt-40 pb-20 px-6 md:px-20"
+    >
+      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+        {/* Left Content */}
+        <div className="md:w-1/2 space-y-6 text-center md:text-left">
+          <p className="text-base md:text-xl leading-relaxed">
+            A scommunity platform where readers can unleash their thoughts in brief brilliance.
+          </p>
+          <h1 className="text-3xl md:text-5xl font-bold">
+            Join the{" "}
+            <span className="text-logo bg-white px-2 py-1 rounded-md">
+              VerseVault
+            </span>{" "}
+            community today!
           </h1>
-          <div className="space-x-4">
-            <Link to="/register" className="bg-button-main text-white px-6 py-3 rounded font-bold hover:opacity-80">Join</Link>
-            <button className="border-2 border-white text-white px-6 py-3 rounded font-bold hover:bg-white hover:text-logo transition">Read More</button>
+          <div>
+            <Link
+              to="/register"
+              className="inline-block bg-white text-logo px-6 py-3 rounded-xl font-bold hover:opacity-90 transition"
+            >
+              Share your Blurb
+            </Link>
           </div>
         </div>
+
+        {/* Right Image (On top for small devices) */}
         <div className="md:w-1/2">
-          <img src={readImage} alt="Reading" className="w-full max-w-md mx-auto transform scale-x-[-1]" />
+          <img
+            src={readImage}
+            alt="Reading illustration"
+            className="w-full max-w-md mx-auto transform scale-x-[-1]"
+          />
         </div>
       </div>
     </section>

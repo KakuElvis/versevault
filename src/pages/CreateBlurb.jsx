@@ -1,4 +1,3 @@
-// src/pages/CreateBlurb.jsx
 import React, { useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
@@ -15,25 +14,39 @@ const CreateBlurb = () => {
   const [blurb, setBlurb] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formKey, setFormKey] = useState(0); // ✅ new key for forcing form reset
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !blurb || !selectedCategory) return alert("All fields required");
+
+    if (!title || !blurb || !selectedCategory) {
+      alert("All fields are required.");
+      return;
+    }
 
     try {
       setLoading(true);
+
       await addDoc(collection(db, "blurbs"), {
         title,
         blurb,
         category: selectedCategory,
         createdAt: Timestamp.now(),
-        userEmail: user.email,
+        userEmail: user?.email || "anonymous",
       });
-      alert("Blurb posted!");
+
+      // Clear form
+      setTitle("");
+      setBlurb("");
+      setSelectedCategory("");
+      setFormKey((prev) => prev + 1); // ✅ trigger re-render of form
+
+      alert("Blurb posted successfully!");
       navigate("/verse");
     } catch (error) {
+      console.error("Error posting blurb:", error);
       alert("Failed to post blurb: " + error.message);
     } finally {
       setLoading(false);
@@ -47,7 +60,8 @@ const CreateBlurb = () => {
       <main className="ml-64 p-6">
         <div className="bg-white shadow p-6 rounded max-w-xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">Create a Blurb</h2>
-          <form onSubmit={handleSubmit}>
+
+          <form key={formKey} onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 mb-2">Book Title</label>
               <input
@@ -79,7 +93,7 @@ const CreateBlurb = () => {
                     key={cat}
                     className={`px-4 py-1 rounded-full border ${
                       selectedCategory === cat
-                        ? "bg-blue-600 text-white"
+                        ? "bg-logo/80 text-white"
                         : "bg-gray-100 text-gray-800"
                     }`}
                     onClick={() => setSelectedCategory(cat)}
@@ -92,7 +106,7 @@ const CreateBlurb = () => {
 
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="bg-logo text-white px-4 py-2 rounded hover:bg-logo/70 transition-colors duration-200"
               disabled={loading}
             >
               {loading ? "Posting..." : "Post Blurb"}
