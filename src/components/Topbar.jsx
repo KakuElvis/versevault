@@ -1,43 +1,30 @@
-// src/components/Topbar.jsx
-import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import React from "react";
+import { auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { FiMenu } from "react-icons/fi";
 
-const Topbar = () => {
+const Topbar = ({ toggleSidebar }) => {
   const [user] = useAuthState(auth);
-  const [displayName, setDisplayName] = useState("Loading...");
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (user) {
-        try {
-          const userRef = doc(db, "users", user.uid);
-          const userSnap = await getDoc(userRef);
-          if (userSnap.exists()) {
-            setDisplayName(userSnap.data().displayName || user.email);
-          } else {
-            setDisplayName(user.email);
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-          setDisplayName(user.email);
-        }
-      }
-    };
-
-    fetchUserData();
-  }, [user]);
 
   return (
-    <div className="bg-white shadow px-6 py-6 flex justify-between items-center sm:justify-between flex-row-reverse sm:flex-row fixed top-0 left-0 right-0 z-20">
-  <h1 className="text-base font-semibold px-10 text-right sm:text-left">Welcome 👋 {displayName}</h1>
-  {/* <div className="flex items-center space-x-4 text-right sm:text-left">
-    <span className="text-gray-700">{displayName}</span>
-    <img src="/src/assets/user.svg" alt="user" className="w-8 h-8 rounded-full" />
-  </div> */}
-</div>
+    <header className="fixed top-0 left-0 right-0 z-10 bg-white shadow-sm h-16 flex items-center justify-between px-4 md:px-6 border-b">
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden text-gray-600 hover:text-logo focus:outline-none"
+      >
+        <FiMenu className="text-2xl" />
+      </button>
 
+      <h1 className="text-xl font-semibold text-logo">VerseVault</h1>
+
+      <div className="flex items-center space-x-4">
+        {user && (
+          <div className="text-sm text-gray-700">
+            👋Welcome, <span className="font-medium">{user.displayName || "User"}</span>
+          </div>
+        )}
+      </div>
+    </header>
   );
 };
 

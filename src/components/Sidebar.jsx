@@ -5,14 +5,35 @@ import { auth } from "../firebase/firebase";
 import CreateBlurbModal from "./CreateBlurbModal";
 import { FaSignOutAlt } from "react-icons/fa";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Slide } from "react-toastify";
+
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false); // ✅ New state
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate("/login");
+  const handleLogout = () => {
+    toast.info("👋 Logging you out...", {
+      position: "top-right",
+      autoClose: 1500,
+    });
+
+    setLoggingOut(true); // ✅ Trigger overlay animation
+
+    setTimeout(async () => {
+      try {
+        await signOut(auth);
+        navigate("/login");
+      } catch (error) {
+        console.error("Logout error:", error);
+        toast.error("Logout failed!");
+        setLoggingOut(false);
+      }
+    }, 1800); // Slightly longer to allow fade effect
   };
 
   return (
@@ -63,6 +84,16 @@ const Sidebar = () => {
 
             <li className="mb-4 flex items-center space-x-2">
               <span className="bg-white text-black p-2 rounded-md">
+                <i className="fa-solid fa-user-pen"></i>
+              </span>
+              <Link to="/my-blurbs" className="hover:text-gray-300">
+                My Blurbs
+              </Link>
+            </li>
+
+
+            <li className="mb-4 flex items-center space-x-2">
+              <span className="bg-white text-black p-2 rounded-md">
                 <i className="fa-solid fa-pen"></i>
               </span>
               <button
@@ -78,7 +109,7 @@ const Sidebar = () => {
                 <i className="fa-solid fa-message"></i>
               </span>
               <Link to="/verse" className="hover:text-gray-300">
-                Blurbs
+                All Blurbs
               </Link>
             </li>
           </ul>
@@ -93,8 +124,20 @@ const Sidebar = () => {
         </nav>
       </aside>
 
-      {/* Blurb Modal */}
+      {/* Modal */}
       {showModal && <CreateBlurbModal onClose={() => setShowModal(false)} />}
+
+      {/* Toast */}
+      <ToastContainer  position="top-right" autoClose={2000} hideProgressBar transition={Slide}  // ✅ Add transition here
+      />
+
+
+      {/* ✅ Logout Transition Overlay */}
+      {loggingOut && (
+        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity opacity-80 duration-3000 animate-fadeOut">
+          <p className="text-lg text-gray-600">Logging out...</p>
+        </div>
+      )}
     </>
   );
 };

@@ -48,3 +48,4 @@ node_modules/
 dist/
 build/
 src/firebase/firebase.js
+note.txt

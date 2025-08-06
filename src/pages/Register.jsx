@@ -1,13 +1,15 @@
+// src/pages/Register.jsx
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setDoc, doc } from "firebase/firestore";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +20,15 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        displayName: user.displayName || "", // Optional: Add a display name input if needed
+        createdAt: new Date(),
+      });
+
       toast.success("Registration successful!", { autoClose: 1500 });
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
@@ -29,7 +39,16 @@ const Register = () => {
   const handleGoogleSignUp = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Create user doc in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        displayName: user.displayName || "",
+        createdAt: new Date(),
+      });
+
       toast.success("Signed up with Google!");
       navigate("/dashboard");
     } catch (err) {
@@ -79,7 +98,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full bg-logo text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg cursor-pointer transition-colors duration-200"
+            className="w-full bg-logo text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg transition-colors duration-200"
           >
             Sign Up
           </button>
@@ -101,9 +120,7 @@ const Register = () => {
 
           <p className="text-center py-3 text-gray-700">
             Already have an account?{" "}
-            <a href="/login" className="text-logo">
-              Sign-in
-            </a>
+            <a href="/login" className="text-logo">Sign-in</a>
           </p>
           <p className="text-center text-logo text-sm">
             Terms and Conditions | Privacy Policy

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { db } from "../firebase/firebase";
+import { db, auth } from "../firebase/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const categories = ["Business", "Leadership", "Law", "IT and Software"];
 
@@ -14,7 +15,7 @@ const CreateBlurb = () => {
   const [blurb, setBlurb] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(false);
-  const [formKey, setFormKey] = useState(0); // ✅ new key for forcing form reset
+  const [formKey, setFormKey] = useState(0); // for resetting form
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const CreateBlurb = () => {
     e.preventDefault();
 
     if (!title || !blurb || !selectedCategory) {
-      alert("All fields are required.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -35,19 +36,20 @@ const CreateBlurb = () => {
         category: selectedCategory,
         createdAt: Timestamp.now(),
         userEmail: user?.email || "anonymous",
+        userName: user?.displayName || "Anonymous",
       });
 
-      // Clear form
+      // Reset form
       setTitle("");
       setBlurb("");
       setSelectedCategory("");
-      setFormKey((prev) => prev + 1); // ✅ trigger re-render of form
+      setFormKey((prev) => prev + 1);
+      toast.success("Blurb posted successfully!");
 
-      alert("Blurb posted successfully!");
-      navigate("/verse");
+      setTimeout(() => navigate("/verse"), 1500);
     } catch (error) {
       console.error("Error posting blurb:", error);
-      alert("Failed to post blurb: " + error.message);
+      toast.error("Failed to post blurb.");
     } finally {
       setLoading(false);
     }
@@ -55,6 +57,7 @@ const CreateBlurb = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <ToastContainer position="top-right" hideProgressBar />
       <Sidebar />
       <Topbar />
       <main className="ml-64 p-6">
@@ -81,7 +84,7 @@ const CreateBlurb = () => {
                 placeholder="Share a thought, quote, or reflection..."
                 value={blurb}
                 onChange={(e) => setBlurb(e.target.value)}
-              ></textarea>
+              />
             </div>
 
             <div className="mb-4">

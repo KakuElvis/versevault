@@ -11,6 +11,7 @@ import Verse from './pages/Verse';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AllBlurbs from './pages/AllBlurbs';
 import ProfileSettings from "./pages/ProfileSettings";
+import MyBlurbs from "./pages/MyBlurbs";
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/my-blurbs" element={<MyBlurbs />} />
       {/* <Route path="/blurbs" element={<AllBlurbs />} /> */}
     </Routes>
   );

@@ -112,9 +112,12 @@ const Verse = () => {
                         : ""}
                     </span>
                   </div>
+
                   <h3 className="text-lg font-bold mb-2">{blurb.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{blurb.blurb}</p>
-                  <p className="text-xs text-gray-500">By: {blurb.userEmail}</p>
+                  <p className="text-xs text-gray-500">
+                    By: {blurb.email || "Anonymous"}
+                  </p>
                 </div>
               ))}
             </div>
