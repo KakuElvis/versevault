@@ -12,7 +12,7 @@ const Hero = () => {
         {/* Left Content */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <p className="text-base md:text-xl leading-relaxed">
-            A scommunity platform where readers can unleash their thoughts in brief brilliance.
+            A community platform where readers can unleash their thoughts in brief brilliance.
           </p>
           <h1 className="text-3xl md:text-5xl font-bold">
             Join the{" "}

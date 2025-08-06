@@ -15,7 +15,7 @@ const Nav = () => {
         {/* Logo */}
         <div className="py-5 font-bold text-3xl flex items-center space-x-2">
           <a href="#home" className="flex items-center space-x-2 text-logo">
-            <img src={logo} alt="VerseVault Logo" className="object-contain" width="50" height="50" />
+            <img src={logo} alt="VerseVault Logo" className="object-contain" width="60" height="50" />
             {/* <span>VerseVault</span> */}
           </a>
         </div>

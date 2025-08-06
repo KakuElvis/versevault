@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -20,7 +19,7 @@ const Sidebar = () => {
     <>
       {/* Toggle Button for Mobile */}
       <button
-        className="fixed top-4 left-4 z-50 md:hidden bg-logo text-white p-2 rounded focus:outline-none"// fixed position for mobile toggle
+        className="fixed top-4 left-4 z-50 md:hidden bg-logo text-white p-2 rounded focus:outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
         <i className="fa-solid fa-bars"></i>
@@ -28,9 +27,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen w-42 bg-logo text-white py-15 px-4 z-40 transition-transform transform ${
+        className={`fixed top-0 left-0 h-screen w-45 bg-logo text-white py-10 px-4 z-40 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:static md:block`}
+        } md:translate-x-0`}
       >
         <h2 className="text-2xl font-bold mb-8">VerseVault</h2>
         <nav className="space-y-4">
@@ -82,24 +81,6 @@ const Sidebar = () => {
                 Blurbs
               </Link>
             </li>
-
-            {/* <li className="mb-4 flex items-center space-x-2">
-              <span className="bg-white text-black p-2 rounded-md">
-                <i className="fa-solid fa-bell"></i>
-              </span>
-              <Link to="#" className="hover:text-gray-300">
-                Notifications
-              </Link>
-            </li>
-
-            <li className="mb-4 flex items-center space-x-2">
-              <span className="bg-white text-black p-2 rounded-md">
-                <i className="fa-solid fa-user-pen"></i>
-              </span>
-              <Link to="/settings" className="hover:text-gray-300">
-                Edit Profile
-              </Link>
-            </li> */}
           </ul>
 
           <button

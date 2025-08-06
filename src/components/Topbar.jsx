@@ -30,8 +30,8 @@ const Topbar = () => {
   }, [user]);
 
   return (
-    <div className="bg-white shadow px-6 py-6 flex justify-between items-center sm:justify-between flex-row-reverse sm:flex-row">
-  <h1 className="text-base font-semibold text-right sm:text-left">Welcome 👋 {displayName}</h1>
+    <div className="bg-white shadow px-6 py-6 flex justify-between items-center sm:justify-between flex-row-reverse sm:flex-row fixed top-0 left-0 right-0 z-20">
+  <h1 className="text-base font-semibold px-10 text-right sm:text-left">Welcome 👋 {displayName}</h1>
   {/* <div className="flex items-center space-x-4 text-right sm:text-left">
     <span className="text-gray-700">{displayName}</span>
     <img src="/src/assets/user.svg" alt="user" className="w-8 h-8 rounded-full" />

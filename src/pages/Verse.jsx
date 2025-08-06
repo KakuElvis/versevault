@@ -1,51 +1,100 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import Sidebar from "../components/Sidebar";
+
+const PAGE_SIZE = 6;
 
 const Verse = () => {
   const [blurbs, setBlurbs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [lastVisibleDoc, setLastVisibleDoc] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
 
-  const fetchBlurbs = async () => {
+  const fetchBlurbs = useCallback(async () => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
     try {
       const blurbsRef = collection(db, "blurbs");
-      const q = query(blurbsRef, orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
+      let q = query(blurbsRef, orderBy("createdAt", "desc"), limit(PAGE_SIZE));
 
-      const blurbsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setBlurbs(blurbsData);
-    } catch (err) {
-      console.error("Error fetching blurbs:", err);
+      if (lastVisibleDoc) {
+        q = query(
+          blurbsRef,
+          orderBy("createdAt", "desc"),
+          startAfter(lastVisibleDoc),
+          limit(PAGE_SIZE)
+        );
+      }
+
+      const snapshot = await getDocs(q);
+      const newDocs = snapshot.docs;
+
+      if (newDocs.length > 0) {
+        const newBlurbs = newDocs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setBlurbs((prev) => [...prev, ...newBlurbs]);
+        setLastVisibleDoc(newDocs[newDocs.length - 1]);
+
+        if (newDocs.length < PAGE_SIZE) setHasMore(false);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error loading blurbs:", error);
+      setHasMore(false);
     } finally {
       setLoading(false);
     }
-  };
+  }, [lastVisibleDoc, loading, hasMore]);
 
   useEffect(() => {
     fetchBlurbs();
   }, []);
 
+  useEffect(() => {
+    if (!loaderRef.current || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading) {
+          fetchBlurbs();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    const ref = loaderRef.current;
+    observer.observe(ref);
+
+    return () => {
+      if (ref) observer.unobserve(ref);
+    };
+  }, [loaderRef, fetchBlurbs, loading, hasMore]);
+
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex bg-gray-100 min-h-screen">
       <Sidebar />
-
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 md:pl-64">
         <Topbar />
-
-        <main className="p-4 sm:p-6 w-full max-w-7xl mx-auto">
+        <main className="pt-20 px-4 sm:px-6 w-full max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold mb-6 text-logo">📚 All Blurbs</h2>
 
-          {loading ? (
-            <div className="flex justify-center items-center h-40">
-              <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          ) : blurbs.length === 0 ? (
-            <p className="text-gray-600">No blurbs posted yet.</p>
+          {blurbs.length === 0 && !loading ? (
+            <p className="text-gray-600 text-center">No blurbs posted yet.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {blurbs.map((blurb) => (
@@ -69,6 +118,20 @@ const Verse = () => {
                 </div>
               ))}
             </div>
+          )}
+
+          {loading && (
+            <div className="flex justify-center items-center py-8">
+              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+
+          {hasMore && <div ref={loaderRef} className="h-12"></div>}
+
+          {!hasMore && blurbs.length > 0 && (
+            <p className="text-center text-sm text-gray-500 mt-4">
+              🎉 You’ve reached the end.
+            </p>
           )}
         </main>
       </div>
