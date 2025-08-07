@@ -13,6 +13,15 @@ import AllBlurbs from './pages/AllBlurbs';
 import ProfileSettings from "./pages/ProfileSettings";
 import MyBlurbs from "./pages/MyBlurbs";
 
+//admin page import
+import AdminRoute from "./routes/AdminRoute";
+
+import AdminLogin from "./pages/AdminLogin";
+
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminUsers from "./pages/AdminUsers";
+
 const App = () => {
   return (
     <Routes>
@@ -55,7 +64,38 @@ const App = () => {
       />
       <Route path="/my-blurbs" element={<MyBlurbs />} />
       {/* <Route path="/blurbs" element={<AllBlurbs />} /> */}
+
+
+      {/* Admin Page Route */}
+
+        <Route
+          path="/admin-dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          }
+        />
+
+     <Route
+        path="/admin-users"
+        element={
+          <AdminRoute>
+            <AdminUsers />
+          </AdminRoute>
+        }
+      />
+
+  <Route path="/admin-login" element={<AdminLogin />} />
+  {/* <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
+
+
+
+
     </Routes>
+
+
+
   );
 };
 

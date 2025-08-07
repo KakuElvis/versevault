@@ -11,13 +11,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setDoc, doc } from "firebase/firestore";
 
-const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const Register = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+    const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -25,8 +25,9 @@ const Register = () => {
 
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
-        displayName: user.displayName || "", // Optional: Add a display name input if needed
+        displayName: user.displayName || "",
         createdAt: new Date(),
+        role: "user", // Add default role
       });
 
       toast.success("Registration successful!", { autoClose: 1500 });
@@ -36,26 +37,28 @@ const Register = () => {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
 
-      // Create user doc in Firestore
-      await setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        displayName: user.displayName || "",
-        createdAt: new Date(),
-      });
+    const handleGoogleSignUp = async () => {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
 
-      toast.success("Signed up with Google!");
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Google Sign-Up Error:", err.message);
-      toast.error(`Google Sign-Up Failed: ${err.message}`);
-    }
-  };
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          displayName: user.displayName || "",
+          createdAt: new Date(),
+          role: "user", // Add default role
+        });
+
+        toast.success("Signed up with Google!");
+        navigate("/dashboard");
+      } catch (err) {
+        console.error("Google Sign-Up Error:", err.message);
+        toast.error(`Google Sign-Up Failed: ${err.message}`);
+      }
+    };
+
 
   return (
     <div
